@@ -282,34 +282,32 @@ public enum ProficiencyLevel {
 
 ---
 
-## 5️⃣ Módulo: **contact**
+## 5️⃣ Módulo: **contact** ✅ Implementado
 
 ### **Responsabilidad:**
-Gestionar el formulario de contacto y mensajes recibidos.
+Gestionar el formulario de contacto y almacenamiento de mensajes recibidos.
 
-### **Estructura:**
+### **Estructura (implementada):**
 ```
 contact/
 ├── application/
 │   ├── ports/
 │   │   ├── in/
-│   │   │   ├── CreateContactUseCase.java
-│   │   │   └── GetAllContactsUseCase.java
+│   │   │   └── CreateContactUseCase.java
 │   │   └── out/
-│   │       └── ContactRepositoryPort.java
+│   │       └── SaveContactPort.java
 │   └── service/
 │       └── ContactService.java
 ├── domain/
 │   ├── exception/
-│   │   ├── InvalidEmailException.java
-│   │   └── ContactNotFoundException.java
+│   │   └── InvalidEmailException.java
 │   └── model/
 │       ├── Contact.java
-│       ├── ContactId.java
 │       └── Email.java (Value Object)
 └── infrastructure/
     ├── mapper/
-    │   └── ContactMapper.java
+    │   ├── ContactMapper.java        # Entity <-> Domain
+    │   └── ContactDTOMapper.java     # DTO <-> Command/Response
     ├── persistence/
     │   ├── entity/
     │   │   └── ContactEntity.java
@@ -318,29 +316,30 @@ contact/
     │   └── adapter/
     │       └── ContactRepositoryAdapter.java
     └── web/
-        ├── controller/
-        │   └── ContactController.java
-        └── dto/
-            ├── ContactRequest.java
-            └── ContactResponse.java
+        ├── dto/
+        │   ├── ContactRequestDTO.java
+        │   ├── ContactResponseDTO.java
+        │   └── CreateContactCommand.java
+        └── in/controller/
+            └── ContactController.java
 ```
 
 ### **Endpoints:**
 ```
-POST /api/contact
-GET  /api/contact (admin - futuro)
+POST /api/contact     ✅ Implementado
+GET  /api/contact     🔜 Futuro (admin)
 ```
 
 ### **Modelo de Dominio:**
 ```java
 public class Contact {
-    private ContactId id;
-    private String name;
-    private Email email;
-    private String subject;
-    private String message;
+    private Long id;
+    private final String name;
+    private final Email email;
+    private final String subject;
+    private final String message;
     private boolean isRead;
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
     private LocalDateTime readAt;
     
     public void markAsRead() {
@@ -350,7 +349,7 @@ public class Contact {
 }
 
 public class Email {
-    private String value;
+    private final String value;
     
     public Email(String value) {
         if (!isValid(value)) {
@@ -358,18 +357,16 @@ public class Email {
         }
         this.value = value;
     }
-    
-    private boolean isValid(String email) {
-        // Validación de formato
-    }
 }
 ```
 
 ### **Reglas de Negocio:**
-- Email debe ser válido (Value Object con validación)
+- Email debe ser válido (Value Object `Email` con validación)
+- Name no puede ser nulo o vacío
 - Message debe tener al menos 10 caracteres
-- Subject es opcional
-- createdAt se asigna automáticamente
+- Subject es opcional (max 200 caracteres)
+- Validación en capa web: `@Valid` con Jakarta Validation en `ContactRequestDTO`
+- createdAt se asigna automáticamente en el constructor del dominio
 - isRead por defecto es false
 
 ---

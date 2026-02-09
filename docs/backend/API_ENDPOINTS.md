@@ -215,11 +215,11 @@ Obtener stack tecnológico personal agrupado por categorías.
 
 ---
 
-### **5. Contact**
+### **5. Contact** ✅
 
 #### `POST /api/contact`
 
-Enviar mensaje de contacto.
+Enviar mensaje de contacto. *(Implementado)*
 
 **Request Body:**
 ```json
@@ -245,6 +245,7 @@ Enviar mensaje de contacto.
   "email": "juan@example.com",
   "subject": "Consulta sobre proyecto",
   "message": "Hola José...",
+  "isRead": false,
   "createdAt": "2025-02-08T10:30:00"
 }
 ```

@@ -64,10 +64,11 @@ Repository Adapter (infrastructure/persistence)
 - Stack tecnológico
 - Habilidades y herramientas
 
-### 5. **contact**
+### 5. **contact** ✅
 - Formulario de contacto
-- Almacenamiento de mensajes
-- Notificaciones
+- Almacenamiento de mensajes en PostgreSQL
+- `POST /api/contact` - Crear mensaje con validación (nombre, email, subject, message)
+- Value Object `Email` con validación de dominio
 
 ### 6. **shared**
 - Configuración global
