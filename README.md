@@ -65,7 +65,7 @@ El backend está organizado en módulos siguiendo arquitectura hexagonal:
 2. **aboutme** - Información "Sobre mí"
 3. **project** - Gestión de proyectos
 4. **techstack** - Stack tecnológico
-5. **contact** - Formulario de contacto
+5. **contact** - Formulario de contacto ✅ (backend implementado)
 6. **shared** - Código compartido
 
 Cada módulo sigue la estructura:
