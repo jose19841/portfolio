@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ContactRequestDTO {
     @NotBlank(message = "el nombre es requerido")
-    @Size(max = 100, message = "el nombre no puede exceder los 100 caracteres")
+    @Size(min = 4, message = "el nombre debe tener al menos 4 caracteres")
     private String name;
 
     @NotBlank(message = "el email es requerido")
