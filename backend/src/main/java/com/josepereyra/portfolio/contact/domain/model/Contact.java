@@ -3,6 +3,8 @@ package com.josepereyra.portfolio.contact.domain.model;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.josepereyra.portfolio.contact.domain.exception.InvalidNameException;
+
 public class Contact {
 
     private Long id;
@@ -15,8 +17,12 @@ public class Contact {
     private LocalDateTime readAt;
 
     public Contact(Long id, String name, Email email, String subject, String message) {
+        
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("el nombre del contacto no puede ser nulo o vacio");
+        }
+        if (name.trim().length() < 4) {
+            throw new InvalidNameException("el nombre debe tener al menos 4 caracteres");
         }
         if (message == null || message.trim().length() < 10) {
             throw new IllegalArgumentException("el mensaje debe tener al menos 10 caracteres");
