@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
 import com.josepereyra.portfolio.contact.domain.exception.InvalidEmailException;
+import com.josepereyra.portfolio.home.domain.exception.HomeInfoNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -76,6 +77,19 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(
             HttpStatus.INTERNAL_SERVER_ERROR.value(), 
             "Error interno del servidor",
+            ex.getMessage(),
+            request.getRequestURI()
+            );
+    }
+    @ExceptionHandler(HomeInfoNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleHomeInfoNotFound(
+        HomeInfoNotFoundException ex,
+        HttpServletRequest request) {
+
+        return new ErrorResponse(
+            HttpStatus.NOT_FOUND.value(), 
+            "Informacion de inicio no encontrada",
             ex.getMessage(),
             request.getRequestURI()
             );
