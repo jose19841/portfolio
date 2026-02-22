@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-
+import com.josepereyra.portfolio.about.domain.exception.AboutMeNotFoundException;
 import com.josepereyra.portfolio.contact.domain.exception.InvalidEmailException;
 import com.josepereyra.portfolio.home.domain.exception.HomeInfoNotFoundException;
 
@@ -94,4 +94,18 @@ public class GlobalExceptionHandler {
             request.getRequestURI()
             );
     }
+    @ExceptionHandler(AboutMeNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleAboutMeNotFound(
+        AboutMeNotFoundException ex,
+        HttpServletRequest request) {
+
+        return new ErrorResponse(
+            HttpStatus.NOT_FOUND.value(), 
+            "No encontrado",
+            ex.getMessage(),
+            request.getRequestURI() 
+            );
+    }
+        
 }
