@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export const Footer = () => {
     return (
         <footer className="bg-gray-900 text-white py-8 mt-auto">
@@ -13,10 +14,10 @@ export const Footer = () => {
                           className="text-gray-400 hover:text-white transition-colors">
                             Github
                         </a>
-                        <a href="mailto:jlpereyra2310@gmail.com"
+                        <Link to="/contact"
                          className="text-gray-400 hover:text-white transition-colors">
                             Email
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
