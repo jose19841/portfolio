@@ -1,4 +1,4 @@
-import api from "../../../shared/utils/api";
+import api from '@/shared/utils/api';
 import type { HomeInfo } from "../types/home.Types";
 
 export const homeService = {

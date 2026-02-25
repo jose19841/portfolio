@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Home } from "../feature/home/pages/Home";
-import { About } from "../feature/about/About";
+import { About } from "../feature/about/pages/About";
 import { Projects } from "../feature/projects/pages/Projects";
 import { TechStack } from "../feature/techStack/pages/TechStack";
 import { Contact } from "../feature/contact/pages/Contact";

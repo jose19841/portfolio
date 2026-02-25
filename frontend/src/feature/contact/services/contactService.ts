@@ -1,4 +1,4 @@
-import api from "../../../shared/utils/api";
+import api from '@/shared/utils/api';
 import type { ContactRequest, ContactResponse } from "../types/contact.types";   
 
 export const contactService = {
